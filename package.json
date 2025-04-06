@@ -1,6 +1,6 @@
 {
   "name": "compare-path",
-  "version": "1.0.0",
+  "version": "1.1.0",
   "description": "An easy-to-use package to detect if two URLs match each other by comparing their abstract paths",
   "main": "./dist/index.js",
   "prettier": "@samislam/prettier-config",
