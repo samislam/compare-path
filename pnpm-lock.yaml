@@ -17,6 +17,9 @@ importers:
       barrelsby:
         specifier: ^2.8.1
         version: 2.8.1
+      tspc:
+        specifier: ^1.1.2
+        version: 1.1.2
       typescript:
         specifier: ^5.8.3
         version: 5.8.3
@@ -354,6 +357,9 @@ packages:
   supports-color@5.5.0:
     resolution: {integrity: sha512-QjVjwdXIt408MIiAqCX4oUKsgU2EqAGzs2Ppkm4aQYbjm+ZEWEcW4SfFNTr4uMNZma0ey4f5lgLrkB0aX0QMow==}
     engines: {node: '>=4'}
+
+  tspc@1.1.2:
+    resolution: {integrity: sha512-2a6CildDvcLB7VCHUTPgT3jdGUfoX0QfgTWQ4F6czwED8o4rAMK4P/ZSUpTJAOpdTOqlsTojj05hyu3F1Wm85g==}
 
   typescript@5.8.3:
     resolution: {integrity: sha512-p1diW6TqL9L07nNxvRMM7hMMw4c5XOo/1ibL4aAIGmSAt9slTE1Xgw5KWuof2uTOvCg9BY7ZRi+GaF+7sfgPeQ==}
@@ -751,6 +757,8 @@ snapshots:
   supports-color@5.5.0:
     dependencies:
       has-flag: 3.0.0
+
+  tspc@1.1.2: {}
 
   typescript@5.8.3: {}
 
