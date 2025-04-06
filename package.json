@@ -22,7 +22,8 @@
     "@samislam/prettier-config": "^1.1.1",
     "@types/node": "^22.14.0",
     "barrelsby": "^2.8.1",
-    "tspc": "^1.1.2",
+    "ts-patch": "^3.3.0",
+    "tsconfig-paths": "^4.2.0",
     "typescript": "^5.8.3"
   }
 }
