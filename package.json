@@ -20,6 +20,14 @@
   ],
   "author": "Islam Yamor",
   "license": "ISC",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/samislam/compare-path"
+  },
+  "bugs": {
+    "url": "https://github.com/samislam/compare-path"
+  },
+  "homepage": "https://github.com/samislam/compare-path#readme",
   "devDependencies": {
     "@samislam/prettier-config": "^1.1.1",
     "@types/node": "^22.14.0",
