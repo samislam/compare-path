@@ -1,0 +1,27 @@
+{
+  "name": "compare-path",
+  "version": "1.0.0",
+  "description": "An easy-to-use package to detect if two URLs match each other by comparing their abstract paths",
+  "main": "./dist/index.js",
+  "prettier": "@samislam/prettier-config",
+  "scripts": {
+    "build": "barrelsby --delete --directory ./src",
+    "format": "prettier --write ./src/**"
+  },
+  "keywords": [
+    "path",
+    "compare",
+    "url",
+    "url-match",
+    "match-url",
+    "navigation-highlight"
+  ],
+  "author": "Islam Yamor",
+  "license": "ISC",
+  "devDependencies": {
+    "@samislam/prettier-config": "^1.1.1",
+    "@types/node": "^22.14.0",
+    "barrelsby": "^2.8.1",
+    "typescript": "^5.8.3"
+  }
+}
