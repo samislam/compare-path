@@ -1,6 +1,12 @@
 /**
- * Remove any leading/trailing whitespace and slashes adn remove multiple consecutive slashes (/)
- * anywhere in the path.
+ * Cleans a URL path by:
+ *
+ * - Trimming leading and trailing whitespace
+ * - Removing leading and trailing slashes
+ * - Replacing multiple consecutive slashes with a single slash
+ *
+ * @param path - The raw path string (e.g., '///users//1///')
+ * @returns The cleaned path (e.g., 'users/1')
  */
 export const cleanPath = (path: string): string =>
   path
