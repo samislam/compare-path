@@ -1,8 +1,8 @@
 # 🛣️ compare-path
-An easy-to-use TypeScript utility to determine if two URL paths match based on a route shape pattern. Supports route parameters like :id and wildcards (**) for flexible path matching.
+An easy-to-use TypeScript utility to determine if two URL paths match based on a route shape pattern. Supports route parameters like `:id` and `[id]`, plus wildcards (`**`) for flexible path matching.
 
 ## ✨ Features
-🔍 Match dynamic segments like /user/:id
+🔍 Match dynamic segments like `/user/:id` and `/user/[id]`
 🌟 Support for wildcard segments with ** (e.g., /docs/**/edit)
 🧼 Automatic path normalization (//foo//bar/ → foo/bar)
 💡 Type-safe route parameter extraction using TypeScript
@@ -40,6 +40,13 @@ if (matched) {
 
 ```
 
+Bracket param syntax works too:
+```ts
+const [matched, params] = comparePath('/user/[id]', '/user/42')
+// matched: true
+// params: { id: '42' }
+```
+
 # Wildcard Example
 ```ts
 const [matched, params] = comparePath('/docs/**/edit', '/docs/api/v1/intro/edit')
@@ -69,6 +76,10 @@ Returns:
 - `[true, ExtractRouteParams<T>]` // if matched
 - [false, null] // if not matched
 
+Supported shape syntax:
+- Dynamic segment: `:id` or `[id]`
+- Catch-all segment: `**` (returned as `params.rest`)
+
 ### `cleanPath(path: string): string`
 Cleans a path by:
 - Trimming whitespace.
@@ -84,6 +95,7 @@ Infers the expected parameter names and types from a given shape string at compi
 | Shape         | Path                    | Params Result                            |
 | ------------- | ----------------------- | ---------------------------------------- |
 | /user/:id     | /user/42                | { id: '42' }                             |
+| /user/[id]    | /user/42                | { id: '42' }                             |
 | /docs/**/edit | /docs/api/v1/intro/edit | { rest: ['api', 'v1', 'intro'] }         |
 | /a/:x/**/b/:y | /a/1/foo/bar/b/2        | { x: '1', y: '2', rest: ['foo', 'bar'] } |
 
