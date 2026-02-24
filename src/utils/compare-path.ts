@@ -7,11 +7,12 @@ import { ExtractRouteParams } from '../type-helpers/extract-route-params'
  * Supports:
  *
  * - Dynamic segments via `:param` or `[param]`
- * - Catch-all segments via `**`
+ * - Catch-all segments via `**` or `[...param]`
  *
  * @example
  *   comparePath('/users/:id', '/users/123') // [true, { id: '123' }]
  *   comparePath('/docs/**', '/docs/foo/bar') // [true, { rest: ['foo', 'bar'] }]
+ *   comparePath('/docs/[...slug]', '/docs/foo/bar') // [true, { slug: ['foo', 'bar'] }]
  *
  * @template T - Route shape string (e.g., '/users/:id' or '/users/[id]')
  * @template U - Actual URL path string to compare
@@ -34,11 +35,22 @@ export function comparePath<T extends string, U extends string>(
 
   let params: Record<string, any> = {}
 
-  const wildcardIndex = shapeParts.indexOf('**')
+  const getCatchAllParamName = (segment: string): string | null => {
+    if (segment === '**') return 'rest'
+    if (segment.startsWith('[...') && segment.endsWith(']')) {
+      return segment.slice(4, -1)
+    }
+    return null
+  }
+
+  const wildcardIndex = shapeParts.findIndex((segment) => getCatchAllParamName(segment) !== null)
+  const wildcardParamName =
+    wildcardIndex === -1 ? null : getCatchAllParamName(shapeParts[wildcardIndex])
 
   /** Checks if a segment is a dynamic param (either :param or [param]) */
   const isParam = (segment: string): boolean =>
-    segment.startsWith(':') || (segment.startsWith('[') && segment.endsWith(']'))
+    segment.startsWith(':') ||
+    (segment.startsWith('[') && segment.endsWith(']') && !segment.startsWith('[...'))
 
   /**
    * Extracts the param name from a segment
@@ -97,7 +109,9 @@ export function comparePath<T extends string, U extends string>(
 
     const restStart = preParts.length
     const restEnd = pathParts.length - postParts.length
-    params['rest'] = pathParts.slice(restStart, restEnd)
+    if (wildcardParamName) {
+      params[wildcardParamName] = pathParts.slice(restStart, restEnd)
+    }
 
     return [true, params as ExtractRouteParams<T>]
   }
